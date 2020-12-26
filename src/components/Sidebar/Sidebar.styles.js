@@ -27,7 +27,11 @@ export const SidebarHeader = styled.h3`
   font-size: 40px;
 `;
 
-export const MenuItemContainer = styled.div``;
+export const MenuItemContainer = styled.div`
+  cursor: pointer;
+`;
+
+export const ItemContainer = styled.div``;
 
 export const MenuItem = styled.div`
   ${(p) =>
@@ -41,6 +45,8 @@ export const MenuItem = styled.div`
   color: ${(p) => (p.isSelected ? 'rgba(255, 255, 255)' : 'rgba(19, 15, 64)')};
   font-family: ${(p) => p.font};
   white-space: nowrap;
+  position: relative;
+  transition: 0.2s ease-in all;
 
   &:hover {
     color: rgba(255, 255, 255);
@@ -51,7 +57,8 @@ export const MenuItem = styled.div`
     content: '';
     border: 1px solid
       ${(p) => (p.isSelected ? 'rgba(255, 255, 255)' : 'rgba(225, 112, 85)')};
-    display: block;
+    display: ${(p) =>
+      p.isSidebarOpen && p.isSelected && p.isOpen ? 'none' : 'block'};
     margin: 8px 0 4px;
   }
 
@@ -78,6 +85,33 @@ export const Icon = styled.img`
     p.isSidebarOpen &&
     `padding-right: 20px; transition: 0.2s ease-in padding-right`};
   filter: invert(1);
+`;
+
+export const DropdownIcon = styled.span`
+  position: absolute;
+  top: ${(p) => (p.isOpen ? '12px;' : '16px')};
+  right: 24px;
+  border: solid
+    ${(p) => (p.isSelected ? 'rgba(255, 255, 255);' : 'rgba(225, 112, 85);')};
+  border-width: 0 2px 2px 0;
+  padding: 3px;
+  transform: ${(p) => (p.isOpen ? 'rotate(-135deg);' : 'rotate(45deg);')};
+  transition: 0.4s ease-in all;
+`;
+
+export const SubMenuItemContainer = styled.div`
+  font-size: 14px;
+  ${(p) => p.isSidebarOpen && 'padding-left: 15%'}
+  ${(p) => !p.isSidebarOpen && 'text-align: center'}
+`;
+
+export const SubMenuItem = styled.p`
+  color: ${(p) => (p.selected ? 'rgba(255, 255, 255);' : 'rgba(19, 15, 64);')};
+  padding-top: 3%;
+
+  &:hover {
+    color: rgba(255, 255, 255);
+  }
 `;
 
 // Toggler -----------------------------------------------------------------------------------------------
